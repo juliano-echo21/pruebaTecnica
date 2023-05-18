@@ -13,13 +13,13 @@ export class User extends BaseEntity {
   id: string;
 
   @Column()
-  creditBalance: string;
+  name: string;
 
-  @Column({ name: 'external_User_id', nullable: true })
-  externalUserId: string;
+  @Column()
+  surname: boolean;
 
-  @Column({ name: 'in_default', nullable: false, default: false })
-  inDefault: boolean;
+  @Column()
+  username: boolean;
 
   @OneToMany(() => PaymentMethod, (paymentMethod) => paymentMethod.User)
   paymentMethods: PaymentMethod[];
