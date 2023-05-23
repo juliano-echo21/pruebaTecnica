@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './entities/User';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/User';
+
 
 @Injectable()
 export class AppService {
@@ -11,9 +12,9 @@ export class AppService {
   ) {}
 
   getData() {
-    const user = new User();
-    user.creditBalance = '1000';
-    this.userRepository.save(user);
+    // const user = new User();
+    // user.creditBalance = '1000';
+    // this.userRepository.save(user);
     return [
       {
         id: 1,

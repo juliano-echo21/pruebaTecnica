@@ -1,12 +1,19 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { ItemsController } from './controllers/items.controller';
+import { UsersController } from './controllers/users.controller';
 import { AppService } from './app.service';
+import { ItemsService } from './services/items.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Payment } from './entities/Payment';
 import { User } from './entities/User';
 import { PaymentMethod } from './entities/PaymentMethod';
-const entities = [User, Payment, PaymentMethod];
+import { Item } from './entities/Item';
+import { ItemsModule } from './modules/Items.module';
+import { UsersService } from './services/users.service';
+import { UsersModule } from './modules/Users.module';
+const entities = [User, Payment, PaymentMethod, Item];
 
 @Module({
   imports: [
@@ -18,13 +25,15 @@ const entities = [User, Payment, PaymentMethod];
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: entities,
+      entities: [User, Payment, PaymentMethod, Item],
       synchronize: true,
       logging: ['query', 'error'],
     }),
     TypeOrmModule.forFeature(entities),
+    ItemsModule,
+    UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ItemsController, UsersController],
+  providers: [AppService, ItemsService, UsersService],
 })
 export class AppModule {}

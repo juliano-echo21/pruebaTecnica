@@ -21,6 +21,9 @@ export class User extends BaseEntity {
   @Column()
   username: boolean;
 
+  @Column()
+  creditBalance: number;
+
   @OneToMany(() => PaymentMethod, (paymentMethod) => paymentMethod.User)
   paymentMethods: PaymentMethod[];
 }
